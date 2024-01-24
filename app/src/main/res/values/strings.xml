@@ -1,3 +1,15 @@
 <resources>
 	<string name="app_name">DbExample</string>
+
+	<string name="button_sqlite">Only SQLite</string>
+	<string name="button_room">Room</string>
+	<string name="button_realm">realm</string>
+
+	<string name="button_create_sample">Random Create</string>
+
+	<string-array name="spinner_search_filter">
+		<item>ITEM_VALUE</item>
+		<item>ITEM_CODE</item>
+		<item>ITEM_ID</item>
+	</string-array>
 </resources>

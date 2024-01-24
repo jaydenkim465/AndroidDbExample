@@ -13,7 +13,7 @@
 		android:theme="@style/Theme.DbExample"
 		tools:targetApi="31">
 		<activity
-			android:name=".ReleamActivity"
+			android:name=".RealmActivity"
 			android:exported="false" />
 		<activity
 			android:name=".RoomActivity"

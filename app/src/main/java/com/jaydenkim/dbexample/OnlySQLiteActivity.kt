@@ -1,20 +1,79 @@
 package com.jaydenkim.dbexample
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.jaydenkim.dbexample.adapter.TestItemAdapter
+import com.jaydenkim.dbexample.databinding.ActivityOnlySqliteBinding
+import com.jaydenkim.dbexample.sqlitehelper.SQLiteTestItem
+import com.jaydenkim.dbexample.sqlitehelper.SQLiteTestItemDAO
+import java.util.UUID
 
 class OnlySQLiteActivity : AppCompatActivity() {
+	val binding get() = _binding!!
+	var _binding: ActivityOnlySqliteBinding? = null
+
+	val dataList: Array<SQLiteTestItem> = arrayOf()
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		enableEdgeToEdge()
-		setContentView(R.layout.activity_only_sqlite)
-		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-			val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-			v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-			insets
+
+		_binding = ActivityOnlySqliteBinding.inflate(layoutInflater)
+		setContentView(binding.root)
+
+		initializeUI()
+	}
+
+	private fun initializeUI() {
+		ArrayAdapter.createFromResource(
+				this,
+				R.array.spinner_search_filter,
+				android.R.layout.simple_spinner_item
+		).also { adpter ->
+			adpter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+			binding.spinnerSearchFilter.adapter = adpter
 		}
+
+		binding.spinnerSearchFilter.onItemSelectedListener = object : OnItemSelectedListener {
+			override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+			}
+
+			override fun onNothingSelected(parent: AdapterView<*>?) {
+			}
+		}
+
+		binding.recyclerViewTestItemList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+		binding.recyclerViewTestItemList.adapter = TestItemAdapter(arrayOf())
+		binding.recyclerViewTestItemList.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+
+		binding.buttonCreateSample.setOnClickListener {
+			val dao = SQLiteTestItemDAO()
+			for (i in 0 .. 9) {
+				val uuid = UUID.randomUUID().toString()
+				val item = SQLiteTestItem(uuid, "T", "TEST_$i")
+				dao.insertItem(this, item)
+			}
+		}
+
+		binding.searchViewQuery.setOnQueryTextListener(object : OnQueryTextListener {
+			override fun onQueryTextChange(newText: String?): Boolean {
+				return true
+			}
+
+			override fun onQueryTextSubmit(query: String?): Boolean {
+				val dao = SQLiteTestItemDAO()
+				val list = dao.selectAll(this@OnlySQLiteActivity)
+				binding.recyclerViewTestItemList.adapter = TestItemAdapter(list)
+
+				// true 이면 키보드 유지, false 이면 키보드 숨기기
+				return false
+			}
+		})
 	}
 }

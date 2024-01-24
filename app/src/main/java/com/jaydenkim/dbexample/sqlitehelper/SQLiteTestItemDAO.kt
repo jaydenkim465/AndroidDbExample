@@ -2,6 +2,7 @@ package com.jaydenkim.dbexample.sqlitehelper
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -19,21 +20,22 @@ class SQLiteTestItemDAO {
 
 	companion object {
 		const val SQL_CREATE_TABLE =
-				"CREATE TABLE ${ItemColumn.TABLE_NAME} (" +
-						"${ItemColumn._ID} INTEGER PRIMARY KEY, " +
-						"${ItemColumn.ITEM_ID} TEXT UNIQUE NOT NULL, " +
-						"${ItemColumn.ITEM_CD} TEXT, " +
-						"${ItemColumn.ITEM_VALUE} TEXT, " +
-						"${ItemColumn.REG_DATE} TEXT NOT NULL, " +
-						"${ItemColumn.UPD_DATE} TEXT )"
+			"CREATE TABLE ${ItemColumn.TABLE_NAME} (" +
+					"${ItemColumn._ID} INTEGER PRIMARY KEY, " +
+					"${ItemColumn.ITEM_ID} TEXT UNIQUE NOT NULL, " +
+					"${ItemColumn.ITEM_CD} TEXT, " +
+					"${ItemColumn.ITEM_VALUE} TEXT, " +
+					"${ItemColumn.REG_DATE} TEXT NOT NULL, " +
+					"${ItemColumn.UPD_DATE} TEXT )"
 
 		const val SQL_DROP_TABLE =
-				"DROP TABLE IF EXIST ${ItemColumn.TABLE_NAME}"
+			"DROP TABLE IF EXIST ${ItemColumn.TABLE_NAME}"
 	}
 
-	fun selectAll(context: Context) {
+	fun selectAll(context: Context): Array<SQLiteTestItem> {
 		val db = SQLiteHelper.getInstance(context)
-		db.select(ItemColumn.TABLE_NAME)
+		val cursor = db.select(ItemColumn.TABLE_NAME)
+		return cursorToTestItem(cursor)
 	}
 
 	fun insertItem(context: Context, item: SQLiteTestItem) {
@@ -65,5 +67,26 @@ class SQLiteTestItemDAO {
 		val db = SQLiteHelper.getInstance(context)
 		val whereString = "${ItemColumn.ITEM_ID} = ?"
 		db.delete(ItemColumn.TABLE_NAME, whereString, arrayOf(item.itemId))
+	}
+
+	fun cursorToTestItem(cursor: Cursor): Array<SQLiteTestItem> {
+		val list = mutableListOf<SQLiteTestItem>()
+		if (cursor != null) {
+			if (cursor.moveToFirst()) {
+				do {
+					val dbId = cursor.getString(0)
+					val itemId = cursor.getString(1)
+					val itemCd = cursor.getString(2)
+					val itemValue = cursor.getString(3)
+					val regDate = cursor.getString(4)
+					val udpDate = cursor.getString(5)
+
+					val item = SQLiteTestItem(dbId, itemId, itemCd, itemValue, regDate, udpDate)
+					list.add(item)
+				} while (cursor.moveToNext())
+			}
+			cursor.close()
+		}
+		return list.toTypedArray()
 	}
 }

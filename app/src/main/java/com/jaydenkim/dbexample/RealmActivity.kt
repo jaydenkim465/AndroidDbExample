@@ -5,16 +5,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.jaydenkim.dbexample.databinding.ActivityRoomBinding
+import com.jaydenkim.dbexample.databinding.ActivityRealmBinding
 
-class RoomActivity : AppCompatActivity() {
+class RealmActivity : AppCompatActivity() {
 	val binding get() = _binding!!
-	var _binding: ActivityRoomBinding? = null
+	var _binding: ActivityRealmBinding? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
-		_binding = ActivityRoomBinding.inflate(layoutInflater)
+		_binding = ActivityRealmBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 	}
 }

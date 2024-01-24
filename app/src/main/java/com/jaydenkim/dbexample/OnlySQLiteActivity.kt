@@ -9,22 +9,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jaydenkim.dbexample.adapter.TestItemAdapter
-import com.jaydenkim.dbexample.databinding.ActivityOnlySqliteBinding
+import com.jaydenkim.dbexample.adapter.SQLiteTestItemAdapter
+import com.jaydenkim.dbexample.databinding.ActivityDataListViewBinding
 import com.jaydenkim.dbexample.sqlitehelper.SQLiteTestItem
 import com.jaydenkim.dbexample.sqlitehelper.SQLiteTestItemDAO
 import java.util.UUID
 
 class OnlySQLiteActivity : AppCompatActivity() {
 	val binding get() = _binding!!
-	var _binding: ActivityOnlySqliteBinding? = null
-
-	val dataList: Array<SQLiteTestItem> = arrayOf()
+	var _binding: ActivityDataListViewBinding? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
-		_binding = ActivityOnlySqliteBinding.inflate(layoutInflater)
+		_binding = ActivityDataListViewBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 
 		initializeUI()
@@ -49,7 +47,7 @@ class OnlySQLiteActivity : AppCompatActivity() {
 		}
 
 		binding.recyclerViewTestItemList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-		binding.recyclerViewTestItemList.adapter = TestItemAdapter(arrayOf())
+		binding.recyclerViewTestItemList.adapter = SQLiteTestItemAdapter(arrayOf())
 		binding.recyclerViewTestItemList.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
 
 		binding.buttonCreateSample.setOnClickListener {
@@ -69,7 +67,7 @@ class OnlySQLiteActivity : AppCompatActivity() {
 			override fun onQueryTextSubmit(query: String?): Boolean {
 				val dao = SQLiteTestItemDAO()
 				val list = dao.selectAll(this@OnlySQLiteActivity)
-				binding.recyclerViewTestItemList.adapter = TestItemAdapter(list)
+				binding.recyclerViewTestItemList.adapter = SQLiteTestItemAdapter(list)
 
 				// true 이면 키보드 유지, false 이면 키보드 숨기기
 				return false

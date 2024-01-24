@@ -5,7 +5,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.jaydenkim.dbexample.sqlitehelper.SQLiteTestItemDAO
 import java.text.SimpleDateFormat
 import java.util.Date
 

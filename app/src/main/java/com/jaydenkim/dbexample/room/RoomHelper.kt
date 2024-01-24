@@ -10,8 +10,9 @@ import androidx.room.RoomDatabase
 	version = 1
 )
 
-abstract class RoomHelper: RoomDatabase() {
+abstract class RoomHelper : RoomDatabase() {
 	abstract fun getTestItemDAO(): RoomTestItemDAO
+
 	companion object {
 		private const val DB_NAME = "Room.db"
 

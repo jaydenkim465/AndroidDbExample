@@ -15,5 +15,12 @@ data class RoomTestItem(
 	@ColumnInfo(name = "UPD_DATE") var updDate: String?
 ) {
 	@Ignore
-	constructor(itemId: String, itemCd: String, itemValue: String) : this(0, itemId, itemCd, itemValue, "", "")
+	constructor(itemId: String, itemCd: String, itemValue: String) : this(
+		0,
+		itemId,
+		itemCd,
+		itemValue,
+		"",
+		""
+	)
 }

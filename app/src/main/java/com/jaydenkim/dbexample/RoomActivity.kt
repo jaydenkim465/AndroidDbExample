@@ -80,7 +80,7 @@ class RoomActivity : AppCompatActivity() {
 				GlobalScope.launch(Dispatchers.IO) {
 					val room = RoomHelper.getInstance(this@RoomActivity)
 					val list = room.getTestItemDAO().getAll()
-					withContext(Dispatchers.Main){
+					withContext(Dispatchers.Main) {
 						binding.recyclerViewTestItemList.adapter = RoomTestItemAdapter(list)
 					}
 				}

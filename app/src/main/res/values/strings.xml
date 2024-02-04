@@ -6,10 +6,28 @@
 	<string name="button_realm">realm</string>
 
 	<string name="button_create_sample">Random Create</string>
+	<string name="button_create_item">Create Item</string>
 
 	<string-array name="spinner_search_filter">
 		<item>ITEM_VALUE</item>
 		<item>ITEM_CODE</item>
 		<item>ITEM_ID</item>
 	</string-array>
+
+	<string-array name="sub_menu_list">
+		<item>UPDATE</item>
+		<item>DELETE</item>
+		<item>CANCEL</item>
+	</string-array>
+
+	<string name="text_db_id">_ID</string>
+	<string name="text_item_id">ITEM_ID</string>
+	<string name="text_item_cd">ITEM_CD</string>
+	<string name="text_item_value">ITEM_VALUE</string>
+	<string name="text_reg_date">REG_DATE</string>
+	<string name="text_upd_date">UPD_DATE</string>
+
+	<string name="text_confirm">Confirm</string>
+	<string name="text_cancel">Cancel</string>
+	<string name="text_refresh">Refresh</string>
 </resources>

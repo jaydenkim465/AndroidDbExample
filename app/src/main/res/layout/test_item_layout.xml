@@ -6,7 +6,8 @@
 	android:layout_height="wrap_content"
 	android:orientation="horizontal"
 	android:weightSum="5"
-	android:gravity="center_vertical">
+	android:gravity="center_vertical"
+	android:clickable="true">
 
 	<TextView
 		android:id="@+id/db_index"

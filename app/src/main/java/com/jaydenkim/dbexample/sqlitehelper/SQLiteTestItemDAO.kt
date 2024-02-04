@@ -38,6 +38,12 @@ class SQLiteTestItemDAO {
 		return cursorToTestItem(cursor)
 	}
 
+	fun selectKeyword(context: Context, type: String, keyword: String): Array<SQLiteTestItem> {
+		val db = SQLiteHelper.getInstance(context)
+		val cursor = db.select(ItemColumn.TABLE_NAME, selection = type, selectionArg = arrayOf(keyword))
+		return cursorToTestItem(cursor)
+	}
+
 	fun insertItem(context: Context, item: SQLiteTestItem) {
 		val db = SQLiteHelper.getInstance(context)
 		val values = ContentValues().apply {
@@ -69,7 +75,7 @@ class SQLiteTestItemDAO {
 		db.delete(ItemColumn.TABLE_NAME, whereString, arrayOf(item.itemId))
 	}
 
-	fun cursorToTestItem(cursor: Cursor): Array<SQLiteTestItem> {
+	private fun cursorToTestItem(cursor: Cursor): Array<SQLiteTestItem> {
 		val list = mutableListOf<SQLiteTestItem>()
 		if (cursor != null) {
 			if (cursor.moveToFirst()) {

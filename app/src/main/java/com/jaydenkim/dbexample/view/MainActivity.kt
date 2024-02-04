@@ -1,4 +1,4 @@
-package com.jaydenkim.dbexample
+package com.jaydenkim.dbexample.view
 
 import android.content.Intent
 import android.os.Bundle

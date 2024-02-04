@@ -1,4 +1,4 @@
-package com.jaydenkim.dbexample
+package com.jaydenkim.dbexample.view
 
 import android.os.Bundle
 import android.view.View
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jaydenkim.dbexample.R
 import com.jaydenkim.dbexample.adapter.RoomTestItemAdapter
 import com.jaydenkim.dbexample.databinding.ActivityDataListViewBinding
 import com.jaydenkim.dbexample.room.RoomHelper

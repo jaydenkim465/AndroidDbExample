@@ -6,7 +6,7 @@
 	android:id="@+id/main"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".OnlySQLiteActivity">
+	tools:context=".view.OnlySQLiteActivity">
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:id="@+id/layout_top_area"
@@ -21,6 +21,24 @@
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			android:text="@string/button_create_sample"/>
+
+		<Button
+			android:id="@+id/button_create_item"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintStart_toEndOf="@id/button_create_sample"
+			android:text="@string/button_create_item"
+			/>
+
+		<Button
+			android:id="@+id/button_refresh"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintStart_toEndOf="@id/button_create_item"
+			android:text="@string/text_refresh"
+			/>
 
 		<Spinner
 			android:id="@+id/spinner_search_filter"
